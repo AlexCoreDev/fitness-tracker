@@ -22,8 +22,8 @@ func parsePackage(data string) (int, time.Duration, error) {
 	var lasting time.Duration
 	s := strings.Split(data, ",")
 
-	if len(s) < 2 {
-		return 0, lasting, fmt.Errorf("invalid input: slice length is less 2")
+	if len(s) != 2 {
+		return 0, lasting, fmt.Errorf("invalid input: slice is not equal to 2")
 	}
 
 	countStep, err := strconv.Atoi(s[0])
@@ -31,13 +31,17 @@ func parsePackage(data string) (int, time.Duration, error) {
 		return 0, lasting, fmt.Errorf("invalid steps value: %w", err)
 	}
 
-	if countStep < 0 {
+	if countStep <= 0 {
 		return 0, lasting, fmt.Errorf("invalid steps value")
 	}
 
 	timeWalking, err := time.ParseDuration(s[1])
 	if err != nil {
 		return 0, lasting, fmt.Errorf("invalid duration value: %w", err)
+	}
+
+	if timeWalking <= 0 {
+		return 0, lasting, fmt.Errorf("invalid duration value")
 	}
 
 	return countStep, timeWalking, nil

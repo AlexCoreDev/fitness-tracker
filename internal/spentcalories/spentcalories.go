@@ -21,8 +21,8 @@ func parseTraining(data string) (int, string, time.Duration, error) {
 	// TODO: реализовать функцию
 	s := strings.Split(data, ",")
 	var lasting time.Duration
-	if len(s) < 3 {
-		return 0, "", lasting, fmt.Errorf("invalid input: slice length in less 3")
+	if len(s) != 3 {
+		return 0, "", lasting, fmt.Errorf("invalid input: slice is not equal to 3")
 	}
 
 	countStep, err := strconv.Atoi(s[0])
